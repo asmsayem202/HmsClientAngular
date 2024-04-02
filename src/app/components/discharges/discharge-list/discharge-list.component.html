@@ -1,0 +1,54 @@
+<a routerLink="/Dischargecreate/create" class="btn btn-success">Add New Discharge</a>
+
+<hr />
+<!-- <div>
+    <h2>Discharge List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Discharge Id</th>
+                <th>Admission ID</th>
+                <th>Discharge Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let discharge of discharge">
+                <td>{{ discharge.dischargeId }}</td>
+                <td>{{ discharge.admissionID }}</td>
+                <td>{{ discharge.dischargeDate}}</td>
+
+                <td class="btn-group">
+                    <a [routerLink]="['/DischargeEdit/edit/', discharge.dischargeId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/DischargeDetails/details/', discharge.dischargeId]" class="btn btn-info">Details</a>
+                    <button class="btn btn-danger" (click)="deleteDischage(discharge)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<h2>Discharge List</h2>
+<ejs-grid [dataSource]='discharge' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='dischargeId' headerText='Discharge ID' textAlign='Right' width=50></e-column>
+        <e-column field='admissionID' headerText='Admission ID' width=120></e-column>
+        <e-column field='dischargeDate' headerText='Discharge Date' width=120></e-column>
+
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/DischargeEdit/edit/', data.dischargeId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/DischargeDetails/details/', data.dischargeId]" class="btn btn-info">Details</a>
+                    <button class="btn btn-danger" (click)="deleteDischage(data)">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>

@@ -1,0 +1,205 @@
+
+<form #Form="ngForm" (submit)="OnSubmit()" >
+    <h2>Appointment Prescription</h2>
+    <div class="form-group row">
+        <label for="patientID" class="col-md-4">Patient Name: </label>
+        <input class="form-control-sm  col-md-8" id="patientID" *ngIf="model.patient" [(ngModel)]="model.patient.name" name="patient.name" readonly />
+    </div>
+    <div class="form-group row">
+        <label for="departmentID" class="col-md-4">Department Name: </label>
+        <input class="form-control-sm  col-md-8" id="departmentID"*ngIf="model.department" [(ngModel)]="model.department.name" name="department.name" readonly />
+    </div>
+    <div class="form-group row">
+        <label for="doctorID" class="col-md-4">Doctor Name: </label>
+        <input class="form-control-sm  col-md-8" id="doctorID"*ngIf="model.doctor" [(ngModel)]="model.doctor.name" name="doctor.name" readonly />
+    </div>
+
+    <div class="form-group row">
+        <label for="date" class="col-md-4">Appointment Date: </label>
+        <input type="datetime-local"
+               id="date"
+               name="date"
+               class="form-control-sm  col-md-8"
+               readonly
+               [(ngModel)]="model.appointmentDate"
+               #appdate="ngModel" />
+        <div *ngIf="appdate.invalid && (appdate.dirty && appdate.touched)"
+             class="alert">
+            Select your suitable date and time.
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label for="Description" class="col-md-4">Description: </label>
+        <input type="text"
+               id="Description"
+               name="Description"
+               class="form-control-sm  col-md-8"
+               readonly
+               [(ngModel)]="model.description"
+               #patDescription="ngModel" />
+        <div *ngIf="patDescription.invalid && (patDescription.dirty && patDescription.touched)"
+             class="alert">
+            Enter your Description.
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Severity" class="col-md-4">Severity: </label>
+        <input type="text"
+               id="Severity"
+               name="Severity"
+               class="form-control-sm  col-md-8"
+               readonly
+               [(ngModel)]="model.severity"
+               #patSeverity="ngModel" />
+        <div *ngIf="patSeverity.invalid && (patSeverity.dirty && patSeverity.touched)"
+             class="alert">
+            Enter your Severity.
+        </div>
+    </div>
+
+
+
+
+    <section class="card">
+        <div class="card-header">
+            Prescription
+        </div>
+        <div class="card-body">
+            <div>
+                <label for="symptoms" class="col-md-4 required">Symptoms: </label>
+                <input type="text"
+                       id="symptoms"
+                       name="symptoms"
+                       class="form-control-sm  col-md-8"
+                       [(ngModel)]="model.appointmentPrescribe.symptoms"
+                       #symptoms="ngModel"
+                       required/>
+                <div *ngIf="symptoms.invalid && (symptoms.dirty && symptoms.touched)"
+                     class="alert">
+                    Enter your symptoms.
+                </div>
+            </div>
+
+            <section>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Medication</th>
+                            <th>Dosage</th>
+                            <th>Instruction</th>
+                            <th>
+                                <button type="button" class="btn btn-info" (click)="AddItems()">Add Medicine</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let prc of model.appointmentPrescribe.appointmentPrescribeDetails ; let i = index">
+                            <td class="form-group">
+                                <input type="text"
+                                       name="medication[{{i}}]"
+                                       class="form-control"
+                                       required
+                                       [(ngModel)]="prc.medication" />
+
+                            </td>
+
+                            <td class="form-group">
+                                <input type="text"
+                                       name="dosgae[{{i}}]"
+                                       class="form-control"
+                                       required
+                                       [(ngModel)]="prc.dosgae" />
+
+                            </td>
+                            <td class="form-group">
+                                <input type="text"
+                                       name="instructions[{{i}}]"
+                                       class="form-control"
+                                       [(ngModel)]="prc.instructions" />
+
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="DeleteItems(i)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+           <!--  <div>
+                <label for="medication" class="col-md-4">Medication<span style="color:red">*</span>: </label>                
+                <input type="text"
+                       id="medication"
+                       name="medication"
+                       class="form-control-sm  col-md-8"
+                       [(ngModel)]="model.appointmentPrescribe.medication"
+                       #medication="ngModel"
+                       required/>
+                <div *ngIf="medication.invalid && (medication.dirty && medication.touched)"
+                     class="alert">
+                    Enter your medication.
+                </div>
+            </div>
+            <div>
+                <label for="dosgae" class="col-md-4">Dosgaes: </label>
+                <input type="text"
+                       id="dosgae"
+                       name="dosgae"
+                       class="form-control-sm  col-md-8"
+                       [(ngModel)]="model.appointmentPrescribe.dosgae"
+                       #dosgae="ngModel" />
+                <div *ngIf="dosgae.invalid && (dosgae.dirty && dosgae.touched)"
+                     class="alert">
+                    Enter your Dosgaes.
+                </div>
+            </div>
+            <div>
+                <label for="instructions" class="col-md-4">Instructions: </label>
+                <input type="text"
+                       id="instructions"
+                       name="instructions"
+                       class="form-control-sm  col-md-8"
+                       [(ngModel)]="model.appointmentPrescribe.instructions"
+                       #instructions="ngModel" />
+                <div *ngIf="instructions.invalid && (instructions.dirty && instructions.touched)"
+                     class="alert">
+                    Enter your Instructions.
+                </div>
+            </div> -->
+            <div>
+                <label for="followupDate" class="col-md-4">Followup Date: </label>
+                <input type="datetime-local"
+                       id="followupDate"
+                       name="followupDate"
+                       class="form-control-sm  col-md-8"
+                       [(ngModel)]="model.appointmentPrescribe.followupDate"
+                       #followupDate="ngModel" />
+                <div *ngIf="followupDate.invalid && (followupDate.dirty && followupDate.touched)"
+                     class="alert">
+                    Enter your followupDate.
+                </div>
+            </div>
+            <div>
+                <label for="followupNotes" class="col-md-4">Followup Notes: </label>
+                <input type="text"
+                       id="followupNotes"
+                       name="followupNotes"
+                       class="form-control-sm  col-md-8"
+                       [(ngModel)]="model.appointmentPrescribe.followupNotes"
+                       #followupNotes="ngModel" />
+                <div *ngIf="followupNotes.invalid && (followupNotes.dirty && followupNotes.touched)"
+                     class="alert">
+                    Enter your followupNotes.
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <hr />
+    <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+    <a class="btn btn-outline-info" routerLink="/AppointmentList">Back</a>
+
+
+
+</form>

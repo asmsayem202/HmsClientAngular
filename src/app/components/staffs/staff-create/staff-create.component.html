@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>Staff Create</h2>
+    <form #Form="ngForm" (submit)="onSubmit()">
+        <div class="form-group">
+            <label for="staffName" class="col-md-4 required">Staff Name:</label>
+            <input type="text" class="form-control-sm  col-md-8" id="staffName" [(ngModel)]="model.staffName" name="staffName" required>
+        </div>
+        <div class="form-group">
+            <label for="designation" class="col-md-4 required">Designation:</label>
+            <input type="text" class="form-control-sm  col-md-8" id="designation" [(ngModel)]="model.designation" name="designation" required>
+        </div>
+        <div class="form-group">
+            <label for="address" class="col-md-4">Address:</label>
+            <input type="text" class="form-control-sm  col-md-8" id="address" [(ngModel)]="model.address" name="address">
+        </div>
+        <div class="form-group">
+            <label for="contactNo" class="col-md-4 required">Contact Number:</label>
+            <input type="text" class="form-control-sm  col-md-8" id="contactNo" [(ngModel)]="model.contactNo" name="contactNo" required>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-md-4 required">Email:</label>
+            <input type="email" class="form-control-sm  col-md-8" id="email" [(ngModel)]="model.email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="shift" class="col-md-4 required">Shift:</label>
+            <select class="form-control-sm  col-md-8" id="shift" [(ngModel)]="model.shift" name="shift" required>
+                <option *ngFor="let shiftType of shiftTypes" [value]="shiftType">{{ shiftType }}</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="e-float-text e-label-top" for="upload">Choose a file</label>
+            <input type="file" #imageInput
+                   (change)="uploadImage(imageInput)"
+                   accept="image/*"
+                   [multiple]="false"
+                   class="e-input" />           
+            <figure>
+                <img [src]="model.imageUpload.imageData" width="300" />
+                <figcaption>{{model.imageUpload.imageName}}</figcaption>
+            </figure>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+        <a class="btn btn-outline-info" routerLink="/StaffList">Back</a>
+    </form>
+</div>

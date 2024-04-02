@@ -1,0 +1,52 @@
+<h2>Ward Details</h2>
+
+<span>
+    <strong> Ward : {{model.name}} </strong>
+</span>
+
+
+<hr />
+<div>Room Details</div>
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>RoomId</th>
+            <th>Room Number</th>
+            <th>Status</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let room of model.rooms">
+            <td>{{room.roomId}}</td>
+            <td>{{room.roomNumber}}</td>
+            <td>{{room.status}}</td>
+
+
+        </tr>
+    </tbody>
+</table>
+
+<hr />
+<div>Nurse Details</div>
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>NurseId</th>
+            <th>Name</th>
+            <th>ContactNo</th>
+            <th>Shift</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let nurse of model.nurses">
+            <td>{{nurse.nurseId}}</td>
+            <td>{{nurse.name}}</td>
+            <td>{{nurse.contactNo}}</td>
+            <td>{{nurse.shift}}</td>
+        </tr>
+    </tbody>
+</table>
+<a class="btn btn-outline-info" routerLink="/WardList">Back</a>

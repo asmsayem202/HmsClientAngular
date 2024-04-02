@@ -1,0 +1,79 @@
+<a routerLink="/AdmissionCreate/create" class="btn btn-success">Add New Admission</a>
+
+<hr />
+<!-- <div>
+    <h2>Admission List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Admission Id</th>
+                <th>Admission Date</th>
+                <th>Admission Type</th>
+                <th>Ward Name</th>
+                <th>Ref ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let admission of admissions">
+                <td>{{admission.admissionId}}</td>
+                <td>{{admission.admissionDate | date:'short'}}</td>
+                <td>{{admission.admissionType}}</td>
+
+                <td>
+                    {{admission.ward.name}}
+                </td>
+                <td>
+                    <span *ngIf="admission.admissionType=='Appointment'">
+                        {{admission.appointment.appointmentId}}
+                    </span>
+                    <span *ngIf="admission.admissionType=='Emergency'">
+                        {{admission.emergency.emergencyId}}
+                    </span>
+                </td>
+
+                <td class="btn-group">
+                    <a [routerLink]="['/AdmissionEdit/edit/', admission.admissionId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteAdmission(admission)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<h2>Admission List</h2>
+
+<ejs-grid [dataSource]='admissions' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='admissionId' headerText='Admission ID' textAlign='Right' width=50></e-column>
+        <e-column field='admissionDate' headerText='Admission Date' width=120></e-column>
+        <e-column field='admissionType' headerText='Admission Type' width=120></e-column>
+        <e-column field='ward.name' headerText='Ward Name' width=120></e-column>
+
+        <e-column headerText="Reff ID">
+            <ng-template #template let-data>
+                <span *ngIf="data.admissionType=='Appointment'">
+                    {{data.appointment.appointmentId}}
+                </span>
+                <span *ngIf="data.admissionType=='Emergency'">
+                    {{data.emergency.emergencyId}}
+                </span>
+            </ng-template>
+        </e-column>
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/AdmissionEdit/edit/', data.admissionId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteAdmission(data)">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>
+

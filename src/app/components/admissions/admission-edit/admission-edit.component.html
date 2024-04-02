@@ -1,0 +1,131 @@
+<form #Form="ngForm" (submit)="OnSubmit()">
+    <h2>Admission Edit</h2>
+
+    <div class="form-group row">
+
+        <div>
+            <input type="radio" id="admissionType-Appointment" name="admissionType" [(ngModel)]="model.admissionType" value="Appointment" />
+            <label for="admissionType-Appointment" class="control-label">Appointment</label>
+        </div>
+        <div>
+            <input type="radio" id="admissionType-Emergency" name="admissionType" [(ngModel)]="model.admissionType" value="Emergency" />
+            <label for="admissionType-Emergency" class="control-label">Emergency</label>
+        </div>
+
+
+    </div>
+
+    <div class="form-group row" *ngIf="model.admissionType =='Appointment'">
+        <label for="appointmentID" class="col-md-4">Appointment ID: </label>
+        <select id="appointmentID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                [(ngModel)]="model.appointmentID"
+                #appointmentID="ngModel">
+            <option *ngFor="let appointment of appointments" [value]="appointment.appointmentId">
+                {{appointment.appointmentId}}
+            </option>
+        </select>
+        <div *ngIf="appointmentID.invalid && (appointmentID.dirty && appointmentID.touched)"
+             class="alert">
+            Select Appointment ID.
+        </div>
+    </div>
+
+
+    <div class="form-group row" *ngIf="model.admissionType =='Emergency'">
+
+        <label for="emergencyID" class="col-md-4">Emergency ID: </label>
+        <select id="emergencyID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                [(ngModel)]="model.emergencyID"
+                #emergencyID="ngModel">
+            <option *ngFor="let emergency of emergencys" [value]="emergency.emergencyId">
+                {{emergency.emergencyId}}
+            </option>
+        </select>
+        <div *ngIf="emergencyID.invalid && (emergencyID.dirty && emergencyID.touched)"
+             class="alert">
+            Select Emergency ID.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="wardID" class="col-md-4 required">Ward Name: </label>
+        <select id="wardID"
+                name="wardID"
+                class="form-control-sm  col-md-8"
+                required
+                (change)="WardChangeNg()"
+                [(ngModel)]="model.wardID"
+                #wardID="ngModel">
+            <option *ngFor="let ward of ward" [value]="ward.wardId">
+                {{ward.name}}
+            </option>
+        </select>
+        <div *ngIf="wardID.invalid && (wardID.dirty && wardID.touched)"
+             class="alert">
+            Select Ward Name.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="nurseID" class="col-md-4 required">Nurse Name: </label>
+        <select id="nurseID"
+                name="nurseID"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.nurseID"
+                #nurseID="ngModel">
+            <option *ngFor="let nur of nurse" [value]="nur.nurseId">
+                {{nur.name}}
+            </option>
+        </select>
+        <div *ngIf="nurseID.invalid && (nurseID.dirty && nurseID.touched)"
+             class="alert">
+            Select nurse Name.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="roomID" class="col-md-4 required">Room Name: </label>
+        <select id="roomID"
+                name="roomID"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.roomID"
+                #roomID="ngModel">
+            <option *ngFor="let rm of room" [value]="rm.roomId">
+                {{rm.roomNumber}}
+            </option>
+        </select>
+        <div *ngIf="roomID.invalid && (roomID.dirty && roomID.touched)"
+             class="alert">
+            Select room Name.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="date" class="col-md-4">Admission Date: </label>
+        <input type="datetime-local"
+               id="date"
+               name="date"
+               class="form-control-sm  col-md-8"
+               required
+               [(ngModel)]="model.admissionDate"
+               #admissiondate="ngModel" />
+        <div *ngIf="admissiondate.invalid && (admissiondate.dirty && admissiondate.touched)"
+             class="alert">
+            Select your suitable date and time.
+        </div>
+    </div>
+
+
+
+    <hr />
+    <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+    <a class="btn btn-outline-info" routerLink="/AdmissionList">Back</a>
+
+</form>
+

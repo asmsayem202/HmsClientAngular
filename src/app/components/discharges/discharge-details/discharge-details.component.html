@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Discharge Details</h2>
+    <div *ngIf="discharge">
+        <div class="row">
+            <div class="col-md-4"><strong>Discharge ID:</strong></div>
+            <div class="col-md-8">{{ discharge.dischargeId }}</div>
+        </div>        
+        <div class="row">
+            <div class="col-md-4"><strong>Admission ID:</strong></div>
+            <div class="col-md-8">{{ discharge.admissionID }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"><strong>Discharge Date:</strong></div>
+            <div class="col-md-8">{{ discharge.dischargeDate | date:'short'}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"><strong>Reason:</strong></div>
+            <div class="col-md-8">{{ discharge.reason }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"><strong>Discharge Instructions:</strong></div>
+            <div class="col-md-8">{{ discharge.dischargeInstructions }}</div>
+        </div>
+    </div>
+</div>
+<a class="btn btn-outline-info" routerLink="/DischargeList">Back</a>

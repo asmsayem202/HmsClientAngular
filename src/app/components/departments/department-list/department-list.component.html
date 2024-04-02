@@ -1,0 +1,53 @@
+
+<a routerLink="/DepartmentCreate/create" class="btn btn-success">Add New Department</a>
+<hr />
+<!-- <div>
+    <h2>Department List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dep of department">
+                <td>{{dep.departmentId}}</td>
+                <td>{{dep.name}}</td>
+
+                <td class="btn-group">
+
+                    <a [routerLink]="['/DepartmentEdit/edit/', dep.departmentId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/DepartmentDetails/details/', dep.departmentId]" class="btn btn-info">Details</a>
+                    <button class="btn btn-danger" (click)="DeleteDepartment(dep)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+
+<h2>Department List</h2>
+<ejs-grid [dataSource]='department' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='departmentId' headerText='Department ID' textAlign='Right' width=50></e-column>
+        <e-column field='name' headerText='Department Name' width=120></e-column>
+
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/DepartmentEdit/edit/', data.departmentId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/DepartmentDetails/details/', data.departmentId]" class="btn btn-info">Details</a>
+                    <button class="btn btn-danger" (click)="DeleteDepartment(data)">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>

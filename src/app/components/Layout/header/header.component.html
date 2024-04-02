@@ -1,0 +1,65 @@
+<!--
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">{{ title }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" *ngIf="login">
+                    <a class="nav-link" href="#" (click)="logout()">Logout</a>
+                </li>
+                <li class="nav-item" *ngIf="!login">
+                    <a class="nav-link" routerLink="/login">Login</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+</header>
+ -->
+
+
+
+
+
+
+<mat-toolbar class="custom-toolbar">
+  <button mat-icon-button
+          class="neumorphic-button example-icon"
+          aria-label="Toggle Sidebar"
+          (click)="toggleSidebar()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  &nbsp;
+  <span>Hospital Management System</span>
+  &nbsp;
+
+
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="notification-icon" aria-label="Notification icon button">
+    <mat-icon>notifications</mat-icon>
+  </button>
+
+  <ng-container *ngIf="login">
+    <span class="nav-link text-light">{{ user.username }}</span>
+    <button mat-button class="neumorphic-button" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="!login">
+    <button mat-button class="neumorphic-button" routerLink="/register">
+      <mat-icon>person_add</mat-icon>
+      <span>Register</span>
+    </button>
+    <button mat-button class="neumorphic-button" routerLink="/login">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </ng-container>
+</mat-toolbar>

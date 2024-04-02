@@ -1,0 +1,124 @@
+
+<form #Form="ngForm" (submit)="OnSubmit()">
+    <h2>Appointment Create</h2>
+    <div class="form-group row">
+        <label for="patientID" class="col-md-4 required">Patient Name: </label>
+        <select id="patientID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.patientID"
+                #patID="ngModel">
+            <option *ngFor="let patient of patients" [value]="patient.patientId">
+                {{patient.patientId}}-{{patient.name}}
+            </option>
+        </select>
+        <div *ngIf="patID.invalid && (patID.dirty && patID.touched)"
+             class="alert">
+            Select Patient Name.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="depID" class="col-md-4 required">Department Name: </label>
+        <select id="depID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                (change)="DeptChangeNg()"
+                [(ngModel)]="model.departmentID"
+                #depID="ngModel">
+            <option *ngFor="let dep of departments" [value]="dep.departmentId">
+                {{dep.name}}
+            </option>
+        </select>
+        <div *ngIf="depID.invalid && (depID.dirty && depID.touched)"
+             class="alert">
+            Select Department Name.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="doctorID" class="col-md-4 required">Doctor Name: </label>
+        <select id="doctorID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.doctorID"
+                #docID="ngModel">
+            <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+                {{doctor.name}}
+            </option>
+        </select>
+        <div *ngIf="docID.invalid && (docID.dirty && docID.touched)"
+             class="alert">
+            Select Doctor Name.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="date" class="col-md-4 required">Appointment Date: </label>
+        <input type="datetime-local"
+               id="date"
+               name="date"
+               class="form-control-sm  col-md-8"
+               required
+               [(ngModel)]="model.appointmentDate"
+               #appdate="ngModel" />
+        <div *ngIf="appdate.invalid && (appdate.dirty && appdate.touched)"
+             class="alert">
+            Select your suitable date and time.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="apID" class="col-md-4 required">Appointment Type: </label>
+        <select id="apID"
+                name="appointmentTypeID"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.appointmentTypeID"
+                #apID="ngModel">
+            <option *ngFor="let ap of appointmentTypes" [value]="ap.appointmentTypeId">
+                {{ap.name}}
+            </option>
+        </select>
+        <div *ngIf="apID.invalid && (apID.dirty && apID.touched)"
+             class="alert">
+            Select Appointment Type.
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Description" class="col-md-4">Description: </label>
+        <input type="text"
+               id="Description"
+               name="Description"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.description"
+               #patDescription="ngModel" />
+        <div *ngIf="patDescription.invalid && (patDescription.dirty && patDescription.touched)"
+             class="alert">
+            Enter your Description.
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Severity" class="col-md-4">Severity: </label>
+        <input type="text"
+               id="Severity"
+               name="Severity"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.severity"
+               #patSeverity="ngModel" />
+        <div *ngIf="patSeverity.invalid && (patSeverity.dirty && patSeverity.touched)"
+             class="alert">
+            Enter your Severity.
+        </div>
+    </div>
+
+    <hr />
+    <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+    <a class="btn btn-outline-info" routerLink="/AppointmentList">Back</a>
+
+
+</form>

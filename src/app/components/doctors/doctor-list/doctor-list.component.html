@@ -1,0 +1,80 @@
+
+<a routerLink="/DoctorCreate/create" class="btn btn-success">Add New Doctor</a>
+<hr />
+<!-- <div>
+    <h2>Doctor List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Doctor ID</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>ContactNo</th>
+                <th>Email</th>
+                <th>Schedule</th>
+                <th>Shift</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let doc of doctor">
+                <td>{{ doc.doctorId }}</td>
+                <td>{{ doc.name }}</td>
+                <td>{{ doc.specialization}}</td>
+                <td>{{ doc.contactNo}}</td>
+                <td>{{ doc.email}}</td>
+                <td>{{ doc.schedule}}</td>
+                <td>{{ doc.shift}}</td>
+                <td>
+                    <figure *ngIf="doc.imagePath">
+                        <img [src]="doc.imagePath" width="180" />
+                    </figure>
+                </td>
+                <td class="btn-group">
+                    <a [routerLink]="['/DoctorEdit/edit/', doc.doctorId]" class="btn btn-warning">Edit</a>
+
+                    <button (click)="deleteDoctor(doc)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+
+<h2>Doctor List</h2>
+<ejs-grid [dataSource]='doctor' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='doctorId' headerText='Doctor ID' textAlign='Right' width=50></e-column>
+        <e-column field='name' headerText='Name' width=120></e-column>
+        <e-column field='specialization' headerText='Specialization' width=120></e-column>
+        <e-column field='contactNo' headerText='Contact No' width=120></e-column>
+        <e-column field='email' headerText='Email' width=120></e-column>
+        <e-column field='schedule' headerText='Schedule' width=120></e-column>
+        <e-column field='shift' headerText='Shift' width=120></e-column>
+        <e-column headerText='Image' width=120>
+
+            <ng-template #template let-data>
+                <figure *ngIf="data.imagePath">
+                    <img [src]="data.imagePath" width="100" />
+                </figure>
+            </ng-template>
+        </e-column>
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/DoctorEdit/edit/', data.doctorId]" class="btn btn-warning">Edit</a>
+
+                    <button (click)="deleteDoctor(data)" class="btn btn-danger">Delete</button>
+                    <button (click)="LoadReport()" class="btn btn-primary">Report</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>

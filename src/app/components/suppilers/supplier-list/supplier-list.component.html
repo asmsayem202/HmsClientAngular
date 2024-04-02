@@ -1,0 +1,57 @@
+
+
+<a routerLink="/SupplierCreate/create" class="btn btn-success">Add New Suppiler </a>
+<hr />
+<!-- <div>
+    <h2>Suppiler List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact No</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let supp of supplier">
+                <td>{{supp.supplierId}}</td>
+                <td>{{supp.name}}</td>
+                <td>{{supp.email}}</td>
+                <td>{{supp.contactNo}}</td>
+                <td>{{supp.address}}</td>
+
+                <td class="btn-group">
+                    <a [routerLink]="['/SupplierEdit/edit/', supp.supplierId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/SupplierDetails/details/', supp.supplierId]" class="btn btn-info">Details</a>
+                    <button class="btn btn-danger" (click)="DeleteSupplier(supp)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+ -->
+
+<h2>Supplier List</h2>
+<ejs-grid [dataSource]="supplier" [allowFiltering]="true" [filterSettings]="filterSettings" [allowPaging]="true"
+          [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]="true"
+          [toolbar]="toolbarOptions" width="auto">
+    <e-columns>
+        <e-column field="supplierId" headerText="ID" textAlign='Center' width=80></e-column>
+        <e-column field="name" headerText="Name"></e-column>
+        <e-column field="email" headerText="Email"></e-column>
+        <e-column field="contactNo" headerText="Contact No"></e-column>
+        <e-column field="address" headerText="Address"></e-column>
+        <e-column headerText="Actions" textAlign="Center">
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/SupplierEdit/edit/', data.supplierId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/SupplierDetails/details/', data.supplierId]" class="btn btn-info">Details</a>
+                    <button class="btn btn-danger" (click)="DeleteSupplier(data)">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+</ejs-grid>

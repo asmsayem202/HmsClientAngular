@@ -1,0 +1,66 @@
+
+<a routerLink="/Staffcreate/create" class="btn btn-success">Add New Staff</a>
+<hr />
+<!-- <div>
+    <h2>Staff List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Staff ID</th>
+                <th>Staff Name</th>
+                <th>Designation</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let staff of staffList">
+                <td>{{ staff.staffId }}</td>
+                <td>{{ staff.staffName }}</td>
+                <td>{{ staff.designation}}</td>
+                <td>
+                    <figure *ngIf="staff.imagePath">
+                        <img [src]="staff.imagePath" width="180" />
+                    </figure>
+                </td>
+                <td class="btn-group">
+                    <a [routerLink]="['/StaffEdit/edit/', staff.staffId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/StaffDetails/details/', staff.staffId]" class="btn btn-info">Details</a>
+                    <button (click)="deleteStaff(staff.staffId)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<h2>Staff List</h2>
+<ejs-grid [dataSource]='staffList' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='staffId' headerText='ID' textAlign='Center' width=50></e-column>
+        <e-column field='staffName' headerText='Name' width=120></e-column>
+        <e-column field='designation' headerText='Designation' width=120></e-column>
+        <e-column headerText='Image' width=120>
+
+            <ng-template #template let-data>
+                <figure *ngIf="data.imagePath">
+                    <img [src]="data.imagePath" width="150" />
+                </figure>
+            </ng-template>
+        </e-column>
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/StaffEdit/edit/', data.staffId]" class="btn btn-warning">Edit</a>
+                    <a [routerLink]="['/StaffDetails/details/', data.staffId]" class="btn btn-info">Details</a>
+                    <button (click)="deleteStaff(data)" class="btn btn-danger">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>

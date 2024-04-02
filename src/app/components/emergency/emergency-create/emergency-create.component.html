@@ -1,0 +1,82 @@
+<form #Form="ngForm" (submit)="OnSubmit()">
+
+    <h2>Emergency Create</h2>
+
+    <div class="form-group row">
+        <label for="patientID" class="col-md-4 required">Patient Name: </label>
+        <select id="patientID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.patientID"
+                #patID="ngModel">
+            <option *ngFor="let patient of patients" [value]="patient.patientId">
+                {{patient.patientId}}-{{patient.name}}
+            </option>
+        </select>
+        <div *ngIf="patID.invalid && (patID.dirty && patID.touched)"
+             class="alert">
+            Select Patient Name.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="depID" class="col-md-4 required">Department Name: </label>
+        <select id="depID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.departmentID"
+                (change)="DeptChangeNg()"
+                #depID="ngModel">
+            <option *ngFor="let dep of departments" [value]="dep.departmentId">
+                {{dep.name}}
+            </option>
+        </select>
+        <div *ngIf="depID.invalid && (depID.dirty && depID.touched)"
+             class="alert">
+            Select Department Name.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="doctorID" class="col-md-4 required">Doctor Name: </label>
+        <select id="doctorID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.doctorID"
+                #docID="ngModel">
+            <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+                {{doctor.name}}
+            </option>
+        </select>
+        <div *ngIf="docID.invalid && (docID.dirty && docID.touched)"
+             class="alert">
+            Select Doctor Name.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="location" class="col-md-4">Location:</label>
+        <input type="text" class="form-control-sm  col-md-8" id="location" name="location" [(ngModel)]="model.location">
+    </div>
+    <div class="form-group">
+        <label for="emergencyDateTime" class="col-md-4 required">Emergency Date Time:</label>
+        <input type="datetime-local" class="form-control-sm  col-md-8" id="emergencyDateTime" name="emergencyDateTime" [(ngModel)]="model.emergencyDateTime">
+    </div>
+    <div class="form-group">
+        <label for="description" class="col-md-4">Description:</label>
+        <textarea class="form-control-sm  col-md-8" id="description" name="description" [(ngModel)]="model.description"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="severity" class="col-md-4">Severity:</label>
+        <input type="text" class="form-control-sm  col-md-8" id="severity" name="severity" [(ngModel)]="model.severity">
+    </div>
+
+    <hr />
+    <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+    <a class="btn btn-outline-info" routerLink="/EmergencyList">Back</a>
+
+</form>

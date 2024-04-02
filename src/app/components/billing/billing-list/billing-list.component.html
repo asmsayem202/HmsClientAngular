@@ -1,0 +1,69 @@
+<a routerLink="/BillingCreate/create" class="btn btn-success">Add New Bill</a>
+
+<hr />
+<!-- <div>
+    <h2>Billing List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Patient Name</th>
+                <th>DateTime</th>
+                <th>Amount</th>
+                <th>Discount</th>
+                <th>Net Amount</th>
+                <th>Paid Amountn</th>
+                <th>Balance Due</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let billing of billings">
+                <td>{{billing.billingId}}</td>
+                <td>{{billing.patient.name}}</td>
+                <td>{{billing.dateTime}}</td>
+                <td>{{billing.amount}}</td>
+                <td>{{billing.discount}}</td>
+                <td>{{billing.netAmount}}</td>
+                <td>{{billing.paidAmount}}</td>
+                <td>{{billing.balanceDue}}</td>
+                <td class="btn-group">
+                    <a [routerLink]="['/BillingEdit/edit/', billing.billingId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteBilling(billing)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<h2>Billing List</h2>
+
+<ejs-grid [dataSource]='billings' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='billingId' headerText='bill ID' textAlign='Right' width=50></e-column>
+        <e-column field='patient.name' headerText='Patient Name' width=120></e-column>
+
+        <e-column field='dateTime' headerText='DateTime' width=120></e-column>
+        <e-column field='amount' headerText='Amount' width=120></e-column>
+        <e-column field='discount' headerText='Discount(%)' width=120></e-column>
+        <e-column field='netAmount' headerText='Net Amount' width=120></e-column>
+        <e-column field='paidAmount' headerText='Paid Amount' width=120></e-column>
+        <e-column field='balanceDue' headerText='Balance Due' width=120></e-column>
+
+
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/BillingEdit/edit/', data.billingId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteBilling(data)">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>
