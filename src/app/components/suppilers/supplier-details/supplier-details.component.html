@@ -1,0 +1,36 @@
+<h2>Supplier Details</h2>
+
+<div>
+    <strong> Name : {{model.name}} </strong>
+</div>
+<div>
+    <strong> ContactNo : {{model.contactNo}} </strong>
+</div>
+<div>
+    <strong> Address : {{model.address}} </strong>
+</div>
+
+<hr />
+<div>InventoryItem Details</div>
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>InventoryItemId</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of model.inventoryItems">
+            <td>{{item.inventoryItemId}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.category}}</td>
+        </tr>
+    </tbody>
+
+
+</table>
+<a class="btn btn-outline-info" routerLink="/SupplierList">Back</a>

@@ -1,0 +1,33 @@
+
+<main class="main row justify-content-center align-items-center" style="height: 60vh;">
+    <article class="content col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">Register</h1>
+                <form #form="ngForm" (submit)="register($event)">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="username" placeholder="User Name" required [(ngModel)]="model.userName" #username="ngModel" />
+                        <ul *ngIf="username.invalid && username.touched" class="text-danger">
+                            <li *ngIf="username.errors?.['required']">Name is required</li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required [(ngModel)]="model.email" #usermail="ngModel" />
+                        <ul *ngIf="usermail.invalid && usermail.touched" class="text-danger">
+                            <li *ngIf="usermail.errors?.['required']">Email is required</li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="model.password" required minlength="4" #inputPass="ngModel" />
+                        <ul *ngIf="inputPass.invalid && inputPass.touched" class="text-danger">
+                            <li *ngIf="inputPass.errors?.['required']">Password is required</li>
+                            <li *ngIf="inputPass.errors?.['minlength']">Minimum Password length is 6</li>
+                        </ul>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Register</button>
+                </form>
+            </div>
+        </div>
+    </article>
+</main>
+

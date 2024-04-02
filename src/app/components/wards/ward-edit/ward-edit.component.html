@@ -1,0 +1,131 @@
+<form #Form="ngForm" (submit)="OnSubmit()">
+    <h2>Ward Edit</h2>
+
+    <div class="form-group row">
+        <label for="name" class="col-md-4 required">Ward Name:</label>
+        <input type="text"
+               id="name"
+               name="name"
+               class="form-control-sm  col-md-8"
+               required
+               minlength="3"
+               [(ngModel)]="model.name"
+               #wardName="ngModel" />
+        <div *ngIf="wardName.invalid && (wardName.dirty && wardName.touched)"
+             class="alert">
+            Enter valid ward name
+        </div>
+
+    </div>
+
+
+
+    <hr />
+    <table class="table table-responsive-sm table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    ContactNo
+                </th>
+                <th>
+                    Shift
+                </th>
+
+                <th>
+                    <button type="button" class="btn btn-info" (click)="AddNurse()">Add nurse</button>
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let nurse of model.nurses; let i = index">
+                <td class="form-group">
+                    <input type="text"
+                           name="name[{{i}}]"
+                           class="form-control"
+                           required
+                           [(ngModel)]="nurse.name" />
+
+                </td>
+                <td class="form-group">
+                    <input type="text"
+                           name="contactNo[{{i}}]"
+                           class="form-control"
+                           required
+                           [(ngModel)]="nurse.contactNo" />
+
+                </td>
+                <td class="form-group">
+                    <select name="shift[{{i}}]"
+                            class="form-control"
+                            required
+                            [(ngModel)]="nurse.shift">
+                        <option *ngFor="let shift of shiftTypes" [value]="shift">
+                            {{shift}}
+                        </option>
+
+                    </select>
+
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning" (click)="DeleteNurse(i)">Delete</button>
+                </td>
+        </tbody>
+
+    </table>
+
+    <hr />
+
+
+
+    <table class="table table-responsive-sm table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Room-Number
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    <button type="button" class="btn btn-info" (click)="Addroom()">Add rooms</button>
+                </th>
+            </tr>
+
+
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let room of model.rooms; let i = index">
+                <td class="form-group">
+                    <input type="text"
+                           name="roomNumber[{{i}}]"
+                           class="form-control"
+                           required
+                           [(ngModel)]="room.roomNumber" />
+
+                </td>
+                <td class="form-group">
+                    <input name="status[{{i}}]"
+                           class="form-control"
+                           required
+                           [(ngModel)]="room.status" />
+
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning" (click)="Deleteroom(i)">Delete</button>
+                </td>
+        </tbody>
+
+
+    </table>
+    <hr />
+    <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+    <a class="btn btn-outline-info" routerLink="/WardList">Back</a>
+
+
+</form>

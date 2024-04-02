@@ -1,0 +1,67 @@
+<div class="container">
+    <h2>Doctor Create</h2>
+    <form #Form="ngForm" (submit)="OnSubmit()">
+        <div class="form-group">
+            <label for="name" class="col-md-4 required">Doctor Name:</label>
+            <input type="text" required class="form-control-sm  col-md-8" id="name" [(ngModel)]="model.name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="specialization" class="col-md-4 required">Specialization:</label>
+            <input type="text" class="form-control-sm  col-md-8" required id="specialization" [(ngModel)]="model.specialization" name="specialization">
+        </div>
+        <div class="form-group">
+            <label for="contact" class="col-md-4 required">Contact Number:</label>
+            <input type="text" required class="form-control-sm  col-md-8" id="contact" [(ngModel)]="model.contactNo" name="contact">
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-md-4 required">Email:</label>
+            <input type="email" required class="form-control-sm  col-md-8" id="email" [(ngModel)]="model.email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="schedule" class="col-md-4">Schedule:</label>
+            <input type="text" class="form-control-sm  col-md-8" id="schedule" [(ngModel)]="model.schedule" name="schedule">
+        </div>
+        <div class="form-group">
+            <label for="shift" class="col-md-4 required">Shift:</label>
+            <select class="form-control-sm  col-md-8" id="shift" [(ngModel)]="model.shift" name="shift" required>
+                <option *ngFor="let shiftType of shiftTypes" [value]="shiftType">{{ shiftType }}</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="e-float-text e-label-top" for="upload">Choose a file</label>
+            <input type="file" #imageInput
+                   (change)="uploadImage(imageInput)"
+                   accept="image/*"
+                   [multiple]="false"
+                   class="e-input" />
+            <!--
+            <ejs-uploader #defaultupload id='fileupload' [autoUpload]=false (selected)='onFileSelect($event)'></ejs-uploader> -->
+            <figure>
+                <img [src]="model.imageUpload.imageData" width="300" />
+                <figcaption>{{model.imageUpload.imageName}}</figcaption>
+            </figure>
+        </div>
+
+        <div class="form-group row">
+            <label for="depID" class="col-md-4 required">Department Name: </label>
+            <select id="depID"
+                    name="dep"
+                    class="form-control-sm  col-md-8"
+                    required
+                    [(ngModel)]="model.departmentID"
+                    #depID="ngModel">
+                <option *ngFor="let dep of departments" [value]="dep.departmentId">
+                    {{dep.name}}
+                </option>
+            </select>
+            <div *ngIf="depID.invalid && (depID.dirty && depID.touched)"
+                 class="alert">
+                Select Department Name.
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+        <a class="btn btn-outline-info" routerLink="/DoctorList">Back</a>
+    </form>
+</div>
+

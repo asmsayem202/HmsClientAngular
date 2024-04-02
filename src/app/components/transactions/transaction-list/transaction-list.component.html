@@ -1,0 +1,59 @@
+
+<a routerLink="/TransactionCreate/create" class="btn btn-success">Add New Transaction</a>
+<hr />
+<!-- <div>
+    <h2>Transaction List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Paid Amount</th>
+                <th>Balance Due</th>
+                <th>Reference ID</th>
+                <th>Reference Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tran of transactions">
+                <td>{{ tran.transactionId }}</td>
+                <td>{{ tran.transactionDate }}</td>
+                <td>{{ tran.description}}</td>
+                <td>{{ tran.amount}}</td>
+                <td>{{ tran.paidAmount}}</td>
+                <td>{{ tran.balanceDue}}</td>
+                <td>{{ tran.refTypeID}}</td>
+                <td>{{ tran.refTypeName}}</td>
+                <td class="btn-group">
+                    <a [routerLink]="['/TransactionEdit/edit/', tran.transactionId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteTransaction(tran)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<h2>Transaction List</h2>
+<ejs-grid [dataSource]='transactions' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+    <e-columns>
+        <e-column field='transactionId' headerText='ID' isPrimaryKey='true' width='100'></e-column>
+        <e-column field='transactionDate' headerText='Date' width='120' format='yMd'></e-column>
+        <e-column field='description' headerText='Description' width='200'></e-column>
+        <e-column field='amount' headerText='Amount' width='120' format='C2'></e-column>
+        <e-column field='paidAmount' headerText='Paid Amount' width='140' format='C2'></e-column>
+        <e-column field='balanceDue' headerText='Balance Due' width='140' format='C2'></e-column>
+        <e-column field='refTypeID' headerText='Reference ID' width='150'></e-column>
+        <e-column field='refTypeName' headerText='Reference Name' width='200'></e-column>
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/TransactionEdit/edit/', data.transactionId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteTransaction(data)">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+</ejs-grid>

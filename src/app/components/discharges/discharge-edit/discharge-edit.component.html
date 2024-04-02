@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Discharge Edit</h2>
+    <form #Form="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <label for="admissionID" class="col-md-4 required">Admission ID:</label>
+            <select id="admissionID"
+                    name="admissionID"
+                    class="form-control-sm  col-md-8"
+                    [(ngModel)]="model.admissionID"
+                    required
+                    #admissionID="ngModel">
+                <option *ngFor="let admission of admissions" [value]="admission.admissionId">
+                    {{admission.admissionId}}
+                </option>
+            </select>
+            <div *ngIf="admissionID.invalid && (admissionID.dirty && admissionID.touched)"
+                 class="alert">
+                Select Admission ID.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dischargeDate" class="col-md-4 required">Discharge Date:</label>
+            <input type="datetime-local" class="form-control-sm  col-md-8" id="dischargeDate" name="dischargeDate" [(ngModel)]="model.dischargeDate" required>
+        </div>
+        <div class="form-group">
+            <label for="reason" class="col-md-4">Reason:</label>
+            <input type="text" class="form-control-sm  col-md-8" id="reason" name="reason" [(ngModel)]="model.reason">
+        </div>
+        <div class="form-group">
+            <label for="dischargeInstructions" class="col-md-4">Discharge Instructions:</label>
+            <textarea class="form-control-sm  col-md-8" id="dischargeInstructions" name="dischargeInstructions" [(ngModel)]="model.dischargeInstructions"></textarea>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+        <a class="btn btn-outline-info" routerLink="/DischargeList">Back</a>
+
+    </form>
+</div>
+

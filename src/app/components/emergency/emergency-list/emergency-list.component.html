@@ -1,0 +1,65 @@
+<a routerLink="/EmergencyCreate/create" class="btn btn-success">Add New Emergency</a>
+
+<hr />
+<!-- <div>
+    <h2>Emergency List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Emergency ID</th>
+                <th>Patient Name</th>
+                <th>Doctor Name</th>
+                <th>Department Name</th>
+                <th>Location</th>
+                <th>DateTime</th>
+                <th>Description</th>
+                <th>Severity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emergency of emergency">
+                <td>{{ emergency.emergencyId }}</td>
+                <td>{{ emergency.patient.name }}</td>
+                <td>{{ emergency.doctor.name }}</td>
+                <td>{{ emergency.department.name }}</td>
+                <td>{{ emergency.location }}</td>
+                <td>{{ emergency.emergencyDateTime | date:'medium' }}</td>
+                <td>{{ emergency.description }}</td>
+                <td>{{ emergency.severity }}</td>
+                <td class="btn-group">
+                    <a [routerLink]="['/EmergencyEdit/edit/', emergency.emergencyId]" class="btn btn-warning">Edit</a>
+                    <button (click)="deleteEmergency(emergency)" class="btn btn-danger">Delete</button>
+                    <a [routerLink]="['/EmergencyPrescribe/entry/', emergency.emergencyId]" class="btn btn-info">Prescribe</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+ -->
+
+<h2>Emergency List</h2>
+<ejs-grid [dataSource]='emergency' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='emergencyId' headerText='Emergency ID' textAlign='Right' width=50></e-column>
+        <e-column field='patient.name' headerText='Patient Name' width=120></e-column>
+        <e-column field='department.name' headerText='Department Name ' width=120></e-column>
+        <e-column field='doctor.name' headerText='Doctor Name' width=120></e-column>
+
+        <e-column field='location' headerText='Location' width=120></e-column>
+        <e-column field='emergencyDateTime' headerText='EmergencyDateTime' width=120></e-column>
+        <e-column field='description' headerText='Description' width=120></e-column>
+        <e-column field='severity' headerText='Severity' width=120></e-column>
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/EmergencyEdit/edit/', data.emergencyId]" class="btn btn-warning">Edit</a>
+
+                    <button (click)="deleteEmergency(data)" class="btn btn-danger">Delete</button>
+                    <a [routerLink]="['/EmergencyPrescribe/entry/', data.emergencyId]" class="btn btn-info">Prescribe</a>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>

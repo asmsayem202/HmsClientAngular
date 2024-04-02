@@ -1,0 +1,160 @@
+
+<form #Form="ngForm" (submit)="OnSubmit()">
+    <h2>Bill Edit</h2>
+    <div class="form-group row">
+        <label for="patientID" class="col-md-4 required">Patient Name: </label>
+        <select id="patientID"
+                name="name"
+                class="form-control-sm  col-md-8"
+                required
+                [(ngModel)]="model.patientID"
+                #patID="ngModel">
+            <option *ngFor="let patient of patients" [value]="patient.patientId">
+                {{patient.patientId}}-{{patient.name}}
+            </option>
+        </select>
+        <div *ngIf="patID.invalid && (patID.dirty && patID.touched)"
+             class="alert">
+            Select Patient Name.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="date" class="col-md-4 required">Date: </label>
+        <input type="datetime-local"
+               id="date"
+               name="date"
+               class="form-control-sm  col-md-8"
+               required
+               [(ngModel)]="model.dateTime"
+               #appdate="ngModel" />
+        <div *ngIf="appdate.invalid && (appdate.dirty && appdate.touched)"
+             class="alert">
+            Select your date and time.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="ot_Fee" class="col-md-4">OT Fee: </label>
+        <input type="number"
+               id="ot_Fee"
+               name="ot_Fee"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.ot_Fee"
+               (change)=" CalculateAmounts()"
+               #ot_Fee="ngModel" />
+        <div *ngIf="ot_Fee.invalid && (ot_Fee.dirty && ot_Fee.touched)"
+             class="alert">
+            Enter your ot_Fee.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="medicineFee" class="col-md-4">Medicine Fee: </label>
+        <input type="number"
+               id="medicineFee"
+               name="medicineFee"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.medicineFee"
+               (change)=" CalculateAmounts()"
+               #medicineFee="ngModel" />
+        <div *ngIf="medicineFee.invalid && (medicineFee.dirty && medicineFee.touched)"
+             class="alert">
+            Enter your Medicine Fee.
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
+        <label for="consultancyFee" class="col-md-4">Consultancy Fee: </label>
+        <input type="number"
+               id="consultancyFee"
+               name="consultancyFee"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.consultancyFee"
+               (change)=" CalculateAmounts()"
+               #consultancyFee="ngModel" />
+        <div *ngIf="consultancyFee.invalid && (consultancyFee.dirty && consultancyFee.touched)"
+             class="alert">
+            Enter your consultancyFee.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="bedCharge" class="col-md-4">Bed Charge: </label>
+        <input type="number"
+               id="bedCharge"
+               name="bedCharge"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.bedCharge"
+               (change)=" CalculateAmounts()"
+               #bedCharge="ngModel" />
+        <div *ngIf="bedCharge.invalid && (bedCharge.dirty && bedCharge.touched)"
+             class="alert">
+            Enter your bedCharge.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="serviceCharge" class="col-md-4">Service Charge: </label>
+        <input type="number"
+               id="serviceCharge"
+               name="serviceCharge"
+               class="form-control-sm  col-md-8"
+               [(ngModel)]="model.serviceCharge" (change)=" CalculateAmounts()"
+               #serviceCharge="ngModel" />
+        <div *ngIf="serviceCharge.invalid && (serviceCharge.dirty && serviceCharge.touched)"
+             class="alert">
+            Enter your serviceCharge.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="othersFee" class="col-md-4">Others Charge: </label>
+        <input type="number"
+               id="othersFee"
+               name="othersFee"
+               class="form-control-sm  col-md-8" (change)=" CalculateAmounts()"
+               [(ngModel)]="model.othersFee"
+               #othersFee="ngModel" />
+        <div *ngIf="othersFee.invalid && (othersFee.dirty && othersFee.touched)"
+             class="alert">
+            Enter your othersFee.
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="amount" class="col-md-4">Total Amount: </label>
+        <input id="amount" type="number" class="form-control-sm  col-md-8" readonly name="model.amount" [(ngModel)]="model.amount" />
+    </div>
+    <div class="form-group row">
+        <label for="discount" class="col-md-4">Discount(%): </label>
+        <input id="discount" type="number" class="form-control-sm  col-md-8" min="0" max="100" name="model.discount" [(ngModel)]="model.discount" (change)=" CalculateAmounts()" />
+    </div>
+    <div class="form-group row">
+        <label for="netAmount" class="col-md-4">Net Amount: </label>
+        <input id="netAmount" type="number" class="form-control-sm  col-md-8" name="model.netAmount" [(ngModel)]="model.netAmount" />
+    </div>
+    <div class="form-group row">
+        <label for="paidAmount" class="col-md-4">Paid Amount: </label>
+        <input id="paidAmount" type="number" class="form-control-sm  col-md-8" name="model.paidAmount" [(ngModel)]="model.paidAmount" (change)=" CalculateAmounts()" />
+    </div>
+    <div class="form-group row">
+        <label for="balanceDue" class="col-md-4">Balance Due: </label>
+        <input id="balanceDue" type="number" class="form-control-sm  col-md-8" name="model.balanceDue" [(ngModel)]="model.balanceDue" />
+    </div>
+
+
+
+    <hr />
+    <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+    <a class="btn btn-outline-info" routerLink="/BillingList">Back</a>
+
+
+</form>

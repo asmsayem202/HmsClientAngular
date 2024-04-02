@@ -1,0 +1,70 @@
+
+<a routerLink="/AppointmentCreate/create" class="btn btn-success">Add New Appointment</a>
+
+<hr />
+<!-- <div>
+    <h2>Appointment List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Patient Name</th>
+                <th>Doctor Name</th>
+                <th>Department Name</th>
+                <th>Appointment Type</th>
+                <th>Appointment Date</th>
+                <th>Description</th>
+                <th>Severity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let appointment of appointments">
+                <td>{{appointment.appointmentId}}</td>
+                <td>{{appointment.patient.name}}</td>
+                <td>{{appointment.doctor.name}}</td>
+                <td>{{appointment.department.name}}</td>
+                <td>{{appointment.appointmentType.name}}</td>
+                <td>{{appointment.appointmentDate | date:'short'}}</td>
+                <td>{{appointment.description}}</td>
+                <td>{{appointment.severity}}</td>
+                <td class="btn-group">
+                    <a [routerLink]="['/AppointmentEdit/edit/', appointment.appointmentId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteAppointment(appointment)">Delete</button>
+                    <a [routerLink]="['/AppointmentPrescribe/entry/', appointment.appointmentId]" class="btn btn-info">Prescribe</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<h2>Appointment List</h2>
+
+<ejs-grid [dataSource]='appointments' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='appointmentId' headerText='ID' textAlign='Right' width=50></e-column>
+        <e-column field='patient.name' headerText='Patient Name' width=120></e-column>
+        <e-column field='doctor.name' headerText='Doctor Name' width=120></e-column>
+        <e-column field='department.name' headerText='Department Name' width=120></e-column>
+        <e-column field='appointmentType.name' headerText='Appointment Type' width=120></e-column>
+        <e-column field='appointmentDate' headerText='Appointment Date' width=120></e-column>
+        <e-column field='description' headerText='Description' width=120></e-column>
+        <e-column field='severity' headerText='Severity' width=120></e-column>
+
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/AppointmentEdit/edit/', data.appointmentId]" class="btn btn-warning">Edit</a>
+                    <button class="btn btn-danger" (click)="DeleteAppointment(data)">Delete</button>
+                    <a [routerLink]="['/AppointmentPrescribe/entry/', data.appointmentId]" class="btn btn-info">Prescribe</a>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>

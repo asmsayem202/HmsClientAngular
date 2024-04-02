@@ -1,0 +1,18 @@
+<div *ngIf="staff">
+    <h2>Staff Details</h2>
+    <div>
+        <p><strong>Staff ID:</strong> {{ staff.staffId }}</p>
+        <p><strong>Name:</strong> {{ staff.staffName }}</p>
+        <p><strong>Designation:</strong> {{ staff.designation }}</p>
+        <p><strong>Address:</strong> {{ staff.address }}</p>
+        <p><strong>Contact No:</strong> {{ staff.contactNo }}</p>
+        <p><strong>Email:</strong> {{ staff.email }}</p>
+        <p><strong>Shift:</strong> {{ staff.shift }}</p>
+    </div>
+</div>
+
+<div *ngIf="!staff">
+    <p>Loading staff details...</p>
+</div>
+
+<a class="btn btn-outline-info" routerLink="/StaffList">Back</a>

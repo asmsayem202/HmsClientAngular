@@ -1,0 +1,57 @@
+<div class="container">
+    <h2>Nurse Create</h2>
+    <form #Form="ngForm" (submit)="OnSubmit()">
+        <div class="form-group">
+            <label for="name" class="col-md-4 required">Nurse Name:</label>
+            <input type="text" required class="form-control-sm  col-md-8" id="name" [(ngModel)]="model.name" name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="contact" class="col-md-4 required">Contact Number:</label>
+            <input type="text" required class="form-control-sm  col-md-8" id="contact" [(ngModel)]="model.contactNo" name="contact">
+        </div>
+
+
+        <div class="form-group">
+            <label for="shift" class="col-md-4 required">Shift:</label>
+            <select class="form-control-sm  col-md-8" id="shift" [(ngModel)]="model.shift" name="shift" required>
+                <option *ngFor="let shiftType of shiftTypes" [value]="shiftType">{{ shiftType }}</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="e-float-text e-label-top" for="upload">Choose a file</label>
+            <input type="file" #imageInput
+                   (change)="uploadImage(imageInput)"
+                   accept="image/*"
+                   [multiple]="false"
+                   class="e-input" />
+            <!--
+            <ejs-uploader #defaultupload id='fileupload' [autoUpload]=false (selected)='onFileSelect($event)'></ejs-uploader> -->
+            <figure>
+                <img [src]="model.imageUpload.imageData" width="300" />
+                <figcaption>{{model.imageUpload.imageName}}</figcaption>
+            </figure>
+        </div>
+
+        <div class="form-group row">
+            <label for="wardID" class="col-md-4 required">Ward Name: </label>
+            <select id="wardID"
+                    name="name"
+                    class="form-control-sm  col-md-8"
+                    required
+                    [(ngModel)]="model.wardID"
+                    #wardID="ngModel">
+                <option *ngFor="let ward of wards" [value]="ward.wardId">
+                    {{ward.name}}
+                </option>
+            </select>
+            <div *ngIf="wardID.invalid && (wardID.dirty && wardID.touched)"
+                 class="alert">
+                Select Ward Name.
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="Form.invalid">Save</button>
+        <a class="btn btn-outline-info" routerLink="/NurseList">Back</a>
+    </form>
+</div>

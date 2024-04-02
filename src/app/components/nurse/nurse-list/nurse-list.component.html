@@ -1,0 +1,75 @@
+
+<a routerLink="/NurseCreate/create" class="btn btn-success">Add New Nurse</a>
+<hr />
+<!-- <div>
+    <h2>Nurse List</h2>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Nurse ID</th>
+                <th>Name</th>
+
+                <th>ContactNo</th>
+                <th>Shift</th>
+                <th>Ward</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let nur of nurse">
+                <td>{{ nur.nurseId }}</td>
+                <td>{{ nur.name }}</td>
+
+                <td>{{ nur.contactNo}}</td>
+
+                <td>{{ nur.shift}}</td>
+                <td>{{ nur.ward.name}}</td>
+                <td>
+                    <figure *ngIf="nur.imagePath">
+                        <img [src]="nur.imagePath" width="180" />
+                    </figure>
+                </td>
+                <td class="btn-group">
+                    <a [routerLink]="['/NurseEdit/edit/', nur.nurseId]" class="btn btn-warning">Edit</a>
+
+                    <button (click)="deleteNurse(nur)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+ -->
+
+<h2>Nurse List</h2>
+<ejs-grid [dataSource]='nurse' [allowFiltering]='true' [filterSettings]='filterSettings' [allowPaging]="true" [allowSorting]="true" [allowResizing]="true" [pageSettings]="pageSettings" [showColumnChooser]='true' [toolbar]='toolbarOptions' width='auto'>
+
+    <e-columns>
+        <e-column field='nurseId' headerText='Nurse ID' textAlign='Right' width=50></e-column>
+        <e-column field='name' headerText='Name' width=120></e-column>
+        <e-column field='contactNo' headerText='ContactNo' width=120></e-column>
+        <e-column field='shift' headerText='Shift' width=120></e-column>
+        <e-column headerText='Image' width=120>
+
+            <ng-template #template let-data>
+                <figure *ngIf="data.imagePath">
+                    <img [src]="data.imagePath" width="180" />
+                </figure>
+            </ng-template>
+        </e-column>
+
+        <e-column headerText='Action' width='150' textAlign='Center'>
+            <ng-template #template let-data>
+                <div class="btn-group">
+                    <a [routerLink]="['/NurseEdit/edit/', data.nurseId]" class="btn btn-warning">Edit</a>
+
+                    <button (click)="deleteNurse(data)" class="btn btn-danger">Delete</button>
+                </div>
+            </ng-template>
+        </e-column>
+    </e-columns>
+    <!--     <ng-template #detailTemplate let-data>
+            <div class='custom-grid'></div>
+        </ng-template> -->
+
+</ejs-grid>
